@@ -8,6 +8,7 @@ var server = require("server");
 var cache = require("*/cartridge/scripts/middleware/cache");
 var consentTracking = require("*/cartridge/scripts/middleware/consentTracking");
 var pageMetaData = require("*/cartridge/scripts/middleware/pageMetaData");
+var userLoggedIn = require("*/cartridge/scripts/middleware/userLoggedIn");
 
 /**
  * Any customization on this endpoint, also requires update for Default-Start endpoint
@@ -27,6 +28,7 @@ server.get(
     "Show",
     consentTracking.consent,
     cache.applyDefaultCache,
+    userLoggedIn.validateLoggedIn,
     function (req, res, next) {
         var Site = require("dw/system/Site");
         var PageMgr = require("dw/experience/PageMgr");
