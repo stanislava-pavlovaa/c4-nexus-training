@@ -176,7 +176,8 @@
 }
 
 .home-email-signup {
-  background-color: #444;
+  /* background-color: #444; */
+  background-color: rebeccapurple;
 }
 .home-email-signup > .container {
   padding-top: 0.625em;
