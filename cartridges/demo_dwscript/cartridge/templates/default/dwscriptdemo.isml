@@ -1,0 +1,15 @@
+<iscomment> 
+    <isscript>
+        let customerID = customer.getID();
+        let customerName = customer.profile.firstName;
+    </isscript> 
+</iscomment>
+
+<script>
+    window.onload = setTimeout(() => {
+        console.log('script tag executes in the browser')
+    }, 5000);
+</script>
+
+<iscomment> <h1>Hello Name: ${customerID} Id: ${customerID}</h1> </iscomment>
+<h1>Hello ${pdict.ID} ${pdict.FirstName}</h1>
