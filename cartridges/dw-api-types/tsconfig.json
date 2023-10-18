@@ -1,8 +1,0 @@
-{
-    "compilerOptions": {
-        "noLib": true,
-        "target": "es6",
-        "baseUrl": "./",
-        "noUnusedLocals": true
-    }
-}
