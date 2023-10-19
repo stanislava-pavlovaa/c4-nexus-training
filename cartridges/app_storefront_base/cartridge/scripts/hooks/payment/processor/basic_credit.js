@@ -7,6 +7,7 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 var PaymentStatusCodes = require('dw/order/PaymentStatusCodes');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
+var Profile = require('dw/customer/Profile');
 
 /**
  * Creates a token. This should be replaced by utilizing a tokenization provider
@@ -35,10 +36,8 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
     var serverErrors = [];
     var creditCardStatus;
 
-
     var cardType = paymentInformation.cardType.value;
     var paymentCard = PaymentMgr.getPaymentCard(cardType);
-
 
     // Validate payment instrument
     if (paymentMethodID === PaymentInstrument.METHOD_CREDIT_CARD) {
@@ -145,18 +144,24 @@ function Authorize(orderNumber, paymentInstrument, paymentProcessor) {
     var fieldErrors = {};
     var error = false;
 
-    try {
-        Transaction.wrap(function () {
-            paymentInstrument.paymentTransaction.setTransactionID(orderNumber);
-            paymentInstrument.paymentTransaction.setPaymentProcessor(paymentProcessor);
-        });
-    } catch (e) {
+    if (Profile.email === 'xxx@host.com') {
+        try {
+            Transaction.wrap(function () {
+                paymentInstrument.paymentTransaction.setTransactionID(orderNumber);
+                paymentInstrument.paymentTransaction.setPaymentProcessor(paymentProcessor);
+            });
+        } catch (e) {
+            error = true;
+            serverErrors.push(
+                Resource.msg('error.technical', 'checkout', null)
+            );
+        }
+    } else {
         error = true;
         serverErrors.push(
-            Resource.msg('error.technical', 'checkout', null)
+            Resource.msg('error.unauthorised', 'checkout', null)
         );
     }
-
     return { fieldErrors: fieldErrors, serverErrors: serverErrors, error: error };
 }
 
