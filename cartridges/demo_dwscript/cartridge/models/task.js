@@ -31,11 +31,10 @@ function getProductPrice(product) {
 /**
  *
  * @param {dw.catalog.Catalog} catalog
- * @returns {Category}  category
+ * @returns {Collection}  collection 
  */
 function getMainCategory(catalog) {
-    return catalog.getRoot();
-    // CatalogMgr.getCatalog('catalogID').getRootCategory().getSubCategories()
+    return catalog.getRoot().getSubCategories();
 }
 
 // Create a function to get customer by ID​
@@ -50,20 +49,12 @@ function getCustomerID(customer) {
 
 // Create a function to check if a given customer is assigned to a given customer group​
 /**
- * @param {dw.customer.CustomerMgr} customer
+ * @param {dw.customer.Customer} customer
  * @returns {boolean} true or false
  *
  */
 function getCustomerGroup(customer, customerGroup) {
-    const groups = customer.getCustomerGroups();
-
-    for (const group of groups) {
-        if (group.ID === customerGroup.ID) {
-            return true; // Customer is in the group
-        }
-    }
-
-    return false;
+    return customer.isMemberOfCustomerGroup(customerGroup)
 }
 
 /**
