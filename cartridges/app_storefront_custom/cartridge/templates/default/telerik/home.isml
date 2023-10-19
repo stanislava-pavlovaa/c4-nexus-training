@@ -1,0 +1,29 @@
+<isdecorate template="common/layout/page">
+
+    <p>Hello
+        <isprint value="${pdict.welcomeMsg}" />
+    </p>
+
+    <isscript>
+    var items = ['one', 'two', 'three']    
+</isscript>
+
+    <isloop items="${items}" var="subItem" status="index">
+        <isif condition="${index.first}">
+            <p>
+                <strong>${subItem}</strong>
+            </p>
+        <iselse/>
+            <p>${subItem}</p>
+        </isif>
+    </isloop>
+
+    <iscomment>
+        <isset name="changeScope" value="1" scope="pdict" />
+    </iscomment>
+
+    <iscomment>
+        <isprint value="${new Date()}" encoding="on" style="DATE_LONG" />
+    </iscomment>
+    <isprint value="${new Date().toLocaleString()}" />
+</isdecorate>
