@@ -33,7 +33,10 @@ server.get(
         var ContentModel = require("*/cartridge/models/content");
         var pageMetaHelper = require("*/cartridge/scripts/helpers/pageMetaHelper");
         var page = PageMgr.getPage(req.querystring.cid);
-        let customer = req.currentCustomer;
+
+        var cid = req.httpParameterMap.cid;
+        var assetContent = ContentMgr.getContent(cid)
+        var currentCustomer = req.currentCustomer.raw;
 
         if (page != null && page.isVisible()) {
             if (!page.hasVisibilityRules()) {
@@ -52,8 +55,9 @@ server.get(
 
                 if (content.template) {
                     res.render(content.template, {
-                        content: content,
-                        customer: customer,
+                        cid: cid,
+                        assetContent: assetContent,
+                        currentCustomer: currentCustomer,
                     });
                 } else {
                     Logger.warn(

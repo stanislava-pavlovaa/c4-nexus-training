@@ -1,14 +1,11 @@
+<isif condition="${pdict.currentCustomer.getProfile().firstName}">
+    <isset name="custName" value="${pdict.currentCustomer.getProfile().firstName}" scope="page" />
+<iselse/>
+    <isset name="custName" value="User" scope="page" />
+</isif>
+
 <isdecorate template="common/layout/page">
-    <isif condition="${pdict.customer.profile}">
-        <isprint value="${pdict.content.body}" encoding="off" />
-        <span>
-            <isprint value="${pdict.customer.profile.firstName}" encoding="off" />
-        </span>
-    </isif>
-    <isif condition="${!pdict.customer.profile}">
-        <isprint value="${pdict.content.body}" encoding="off" />
-        <span>
-            User
-        </span>
+    <isif condition="${!empty(pdict.assetContent) && pdict.assetContent.online}">
+        <isprint value="${dw.util.StringUtils.format(pdict.assetContent.custom.body.markup, custName)}" encoding="off" />
     </isif>
 </isdecorate>
