@@ -20,10 +20,10 @@
 
     <iscomment>
         <isset name="changeScope" value="1" scope="pdict" />
-    </iscomment>
-
-    <iscomment>
         <isprint value="${new Date()}" encoding="on" style="DATE_LONG" />
     </iscomment>
+
     <isprint value="${new Date().toLocaleString()}" />
+    <isinclude url="${URLUtils.url('Telerik-Include')}"/>
+
 </isdecorate>

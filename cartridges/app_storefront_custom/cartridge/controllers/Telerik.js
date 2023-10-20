@@ -38,6 +38,16 @@ server.get(
     pageMetaData.computedPageMetaData
 );
 
+server.get( "Include", server.middleware.include, function (req, res, next) {
+        var Site = require("dw/system/Site");
+        res.render("telerik/include", {
+            welcomeMsg: "Welcome user",
+        });
+        next();
+    },
+    pageMetaData.computedPageMetaData
+);
+
 server.get("ErrorNotFound", function (req, res, next) {
     res.setStatusCode(404);
     res.render("error/notFound");
