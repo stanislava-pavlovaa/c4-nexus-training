@@ -35,8 +35,14 @@ server.get(
         var page = PageMgr.getPage(req.querystring.cid);
 
         var cid = req.httpParameterMap.cid;
-        var assetContent = ContentMgr.getContent(cid)
+        var assetContent = ContentMgr.getContent(cid);
         var currentCustomer = req.currentCustomer.raw;
+
+        if (currentCustomer.getProfile() && currentCustomer.getProfile().firstName) {
+            var customerName = currentCustomer.getProfile().firstName;
+        } else {
+            var customerName = "Guest";
+        }
 
         if (page != null && page.isVisible()) {
             if (!page.hasVisibilityRules()) {
@@ -57,7 +63,7 @@ server.get(
                     res.render(content.template, {
                         cid: cid,
                         assetContent: assetContent,
-                        currentCustomer: currentCustomer,
+                        customerName: customerName,
                     });
                 } else {
                     Logger.warn(
