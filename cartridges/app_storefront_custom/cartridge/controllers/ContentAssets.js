@@ -34,15 +34,8 @@ server.get(
         var pageMetaHelper = require("*/cartridge/scripts/helpers/pageMetaHelper");
         var page = PageMgr.getPage(req.querystring.cid);
 
-        var cid = req.httpParameterMap.cid;
-        var assetContent = ContentMgr.getContent(cid);
         var currentCustomer = req.currentCustomer.raw;
-
-        if (currentCustomer.getProfile() && currentCustomer.getProfile().firstName) {
-            var customerName = currentCustomer.getProfile().firstName;
-        } else {
-            var customerName = "Guest";
-        }
+        var assetBody;
 
         if (page != null && page.isVisible()) {
             if (!page.hasVisibilityRules()) {
@@ -59,12 +52,22 @@ server.get(
                 pageMetaHelper.setPageMetaData(req.pageMetaData, content);
                 pageMetaHelper.setPageMetaTags(req.pageMetaData, content);
 
+                if (currentCustomer.getProfile()) {
+                    var loggedUsersAsset = ContentMgr.getContent('logged-users');
+                    var loggedUsersAssetBody = loggedUsersAsset ? loggedUsersAsset.custom.body : '';
+                    assetBody = loggedUsersAssetBody
+                        .toString()
+                        .replace("{0}", currentCustomer.getProfile().firstName);
+                } else {
+                    var guestUsersAsset = ContentMgr.getContent('guest-users-content');
+                    var guestUsersAssetBody = guestUsersAsset ? guestUsersAsset.custom.body : '';
+                    assetBody = guestUsersAssetBody
+                        .toString()
+                        .replace("{0}", 'Guest');
+                }
+
                 if (content.template) {
-                    res.render(content.template, {
-                        cid: cid,
-                        assetContent: assetContent,
-                        customerName: customerName,
-                    });
+                    res.render(content.template, { assetBody });
                 } else {
                     Logger.warn(
                         "Content asset with ID {0} is offline",

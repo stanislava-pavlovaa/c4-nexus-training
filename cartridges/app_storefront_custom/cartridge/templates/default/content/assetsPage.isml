@@ -1,6 +1,3 @@
 <isdecorate template="common/layout/page">
-    <isif condition="${!empty(pdict.assetContent) && pdict.assetContent.online}">
-        <isprint value="${dw.util.StringUtils.format(pdict.assetContent.custom.body.markup, pdict.customerName)}"
-            encoding="off" />
-    </isif>
+    <isprint value="${pdict.assetBody}" encoding="off" />
 </isdecorate>
