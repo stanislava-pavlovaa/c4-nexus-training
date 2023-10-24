@@ -68,7 +68,7 @@
                         </isif>
                         
                         <isif condition="${pdict.numItems > 1}">
-                            <isif condition="${loopState.index === 0}">
+                            <isif condition="${loopState.first}">
                                 This is the first product
                             <iselseif condition="${loopState.last}" />
                                 This is the last product
