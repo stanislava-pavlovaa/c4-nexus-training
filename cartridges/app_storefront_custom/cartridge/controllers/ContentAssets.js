@@ -10,6 +10,19 @@ var consentTracking = require("*/cartridge/scripts/middleware/consentTracking");
 var pageMetaData = require("*/cartridge/scripts/middleware/pageMetaData");
 
 /**
+ * Function to retrieve asset body and replace placeholders
+ * @param {string} assetName - The name of the content asset.
+ * @param {string} placeholderValue - The value to replace the placeholder with.
+ * @returns {string} - The asset body with placeholders replaced.
+ */
+function getAssetBody(assetName, placeholderValue) {
+    var ContentMgr = require("dw/content/ContentMgr");
+    var asset = ContentMgr.getContent(assetName);
+    var assetBody = asset ? asset.custom.body : '';
+    return assetBody.toString().replace("{0}", placeholderValue);
+}
+
+/**
  * ContentAssets-Show : This end point will render a content asset in full storefront ContentAssets
  * @name Base/ContentAssets-Show
  * @function
@@ -53,17 +66,9 @@ server.get(
                 pageMetaHelper.setPageMetaTags(req.pageMetaData, content);
 
                 if (currentCustomer.getProfile()) {
-                    var loggedUsersAsset = ContentMgr.getContent('logged-users');
-                    var loggedUsersAssetBody = loggedUsersAsset ? loggedUsersAsset.custom.body : '';
-                    assetBody = loggedUsersAssetBody
-                        .toString()
-                        .replace("{0}", currentCustomer.getProfile().firstName);
+                    assetBody = getAssetBody('logged-users', currentCustomer.getProfile().firstName);
                 } else {
-                    var guestUsersAsset = ContentMgr.getContent('guest-users-content');
-                    var guestUsersAssetBody = guestUsersAsset ? guestUsersAsset.custom.body : '';
-                    assetBody = guestUsersAssetBody
-                        .toString()
-                        .replace("{0}", 'Guest');
+                    assetBody = getAssetBody('guest-users-content', 'Guest');
                 }
 
                 if (content.template) {
