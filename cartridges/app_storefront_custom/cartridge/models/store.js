@@ -8,7 +8,7 @@ var base = module.superModule;
  * @param {dw.catalog.Store} storeObject - a Store objects
  */
 function store(storeObject) {
-    base.call(this, store);
+    base.call(this, storeObject);
 
     if (storeObject.storeEvents) {
         this.storeEvents = storeObject.storeEvents;
