@@ -59,12 +59,13 @@
 		    label="label.input.residence.profile" 
 			mandatory="false"
 			type="string">
-             <options>
+            <options>
                 <option optionid="us" label="select.option.residence.us" value="us"/>
+                <option optionid="ca" label="select.option.residence.ca" value="ca"/>
                 <option optionid="uk" label="select.option.residence.uk" value="uk"/>
                 <option optionid="bg" label="select.option.residence.bg" value="bg"/>
                 <option optionid="de" label="select.option.residence.de" value="de"/>
-             </options>
+            </options>
         </field>
 
 		<field 
