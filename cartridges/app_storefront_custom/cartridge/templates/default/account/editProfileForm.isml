@@ -36,16 +36,15 @@
             <isprint value="${pdict.profileForm.customer.residence.label}" encoding="htmlcontent" />
         </label>
         <select class="form-control" id="residence"
-            <isloop items=${pdict.profileForm.customer.residence.options} var="residence">
-                <isif condition="${pdict.profileForm.customer.residence}">
-                    <option selected id="${residence.optionid}" value="${residence.label}">
-                        ${residence.label}
-                    </option>
+            <isprint value="${pdict.profileForm.customer.residence.attributes}" encoding="off" />>
+            <isloop items="${pdict.profileForm.customer.residence.options}" var="residence">
+                 <isif condition="${pdict.profileForm.customer.residence.value == residence.value}">
+                    <option selected id="${residence.optionid}" value="${residence.htmlValue}">${residence.label}</option>
                 <iselse/>
-                    <option id="${residence.optionid}" value="${residence.label}">${residence.label}</option>
-                </isif>
+                    <option id="${residence.optionid}" value="${residence.htmlValue}">${residence.label}</option>
+                </isif> 
             </isloop>
-        </select> 
+        </select>
         <div class="invalid-feedback"></div>
     </div>
 
