@@ -1,4 +1,4 @@
-iframe {
+.facebook-post .facebook-post-container iframe {
     border: none;
     overflow: hidden;
 }
