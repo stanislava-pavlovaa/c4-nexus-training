@@ -1,11 +1,11 @@
 <div class="d-flex">
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-12">
         <iframe src="${pdict.src}" width="100%" height="${pdict.height}" title="${pdict.title}"
-            style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"
+            scrolling="no" frameborder="0" allowfullscreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-12">
         <h2 class="title">${pdict.contentTitle}</h2>
         <p class="content">${pdict.content}</p>
     </div>
