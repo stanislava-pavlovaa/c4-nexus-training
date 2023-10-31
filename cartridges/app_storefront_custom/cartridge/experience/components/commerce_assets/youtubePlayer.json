@@ -1,0 +1,46 @@
+{
+    "name": "YouTube player",
+    "description": "A YouTube player",
+    "group": "commerce_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "iframe",
+            "name": "YouTube player Configuration",
+            "description": "You can define the source and title for the video, height and width attributes to specify the size of the iframe.",
+            "attribute_definitions": [
+                {
+                    "id": "src",
+                    "name": "YouTube player source",
+                    "description": "Source to the video shown by the video player.",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "title",
+                    "name": "YouTube player title",
+                    "description": "Title attribute is used by screen readers to read out what the content of the iframe is.",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "height",
+                    "name": "YouTube player height",
+                    "description": "The YouTube player height",
+                    "type": "string",
+                    "required": false,
+                    "default_value": "200"
+                },
+                {
+                    "id": "width",
+                    "name": "YouTube player width",
+                    "description": "The YouTube player width",
+                    "type": "string",
+                    "required": false,
+                    "default_value": "300"
+
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}
