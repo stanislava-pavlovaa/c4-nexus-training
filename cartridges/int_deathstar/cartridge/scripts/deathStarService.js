@@ -15,14 +15,14 @@ function getDeathStar() {
                 svc.setRequestMethod("GET");
                 return args;
             },
-
             parseResponse: function (svc, client) {
                 return client.text;
             },
-
-            filterLogMessage: function(msg) {
-                return msg.replace(/cost_in_credits\: \".*?\"/, "cost_in_credits:$$$$$$$$$$$$$$$$$$$");
-            }
+            filterLogMessage: function (msg) {
+                return msg.replace(
+                    /"cost_in_credits":"\d+"/, "cost_in_credits:$$$$$$$$$$$$$$$$$$$"
+                );
+            },
         }
     );
 
