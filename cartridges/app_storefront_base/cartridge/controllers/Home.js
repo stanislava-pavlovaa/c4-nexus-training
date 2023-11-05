@@ -28,7 +28,6 @@ server.get(
     "Show",
     consentTracking.consent,
     cache.applyDefaultCache,
-    // userLoggedIn.validateLoggedIn,
     function (req, res, next) {
         var Site = require("dw/system/Site");
         var PageMgr = require("dw/experience/PageMgr");
@@ -41,8 +40,7 @@ server.get(
         if (page && page.isVisible()) {
             res.page("homepage");
         } else {
-            // res.render("home/homePage");
-            res.json();
+            res.render("home/homePage");
         }
 
         next();

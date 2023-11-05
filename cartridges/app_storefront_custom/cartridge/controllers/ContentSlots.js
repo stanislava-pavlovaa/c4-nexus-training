@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @namespace Default
+ * @namespace ContentSlots
  */
 
 var server = require("server");
@@ -10,12 +10,14 @@ var consentTracking = require("*/cartridge/scripts/middleware/consentTracking");
 var pageMetaData = require("*/cartridge/scripts/middleware/pageMetaData");
 var userLoggedIn = require("*/cartridge/scripts/middleware/userLoggedIn");
 
-/** when sitepath is defined in the site aliases from business manager, homepage will be rendered directly */
 /**
- * Default-Start : This end point is the root of the site, when opening from the BM this is the end point executed
- * @name Base/Default-Start
+ * Any customization on this endpoint, also requires update for Default-Start endpoint
+ */
+/**
+ * ContentSlots-Show : This endpoint is called when a shopper navigates to the ContentSlots page
+ * @name Base/ContentSlots-Show
  * @function
- * @memberof Default
+ * @memberof ContentSlots
  * @param {middleware} - consentTracking.consent
  * @param {middleware} - cache.applyDefaultCache
  * @param {category} - non-sensitive
@@ -23,7 +25,7 @@ var userLoggedIn = require("*/cartridge/scripts/middleware/userLoggedIn");
  * @param {serverfunction} - get
  */
 server.get(
-    "Start",
+    "Show",
     consentTracking.consent,
     cache.applyDefaultCache,
     function (req, res, next) {
@@ -33,22 +35,16 @@ server.get(
 
         pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
 
-        var page = PageMgr.getPage("homepage");
-
-        if (page && page.isVisible()) {
-            res.page("homepage");
-        } else {
-            res.render("home/homePage");
-        }
+        res.render("content/slotsPage");
 
         next();
     },
     pageMetaData.computedPageMetaData
 );
 
-/** Renders the maintenance page when a site has been set to "Maintenance mode" */
-server.get("Offline", cache.applyDefaultCache, function (req, res, next) {
-    res.render("siteOffline");
+server.get("ErrorNotFound", function (req, res, next) {
+    res.setStatusCode(404);
+    res.render("error/notFound");
     next();
 });
 
