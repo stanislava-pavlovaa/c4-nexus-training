@@ -25,7 +25,7 @@ server.get("Show", server.middleware.https, csrfProtection.generateToken, consen
         newsletterForm.clear();
 
         res.render("subscribe/newsletter", {
-            newsletterForm: newsletterForm,
+            newsletterForm: newsletterForm
         });
         next();
     }
