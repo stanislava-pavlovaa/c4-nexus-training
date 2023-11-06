@@ -5,7 +5,7 @@
  */
 
 var server = require("server");
-
+var Site = require("dw/system/Site");
 var cache = require("*/cartridge/scripts/middleware/cache");
 var deathStarService = require("*/cartridge/scripts/deathStarService.js");
 
@@ -19,11 +19,15 @@ server.get(
     server.middleware.include,
     cache.applyDefaultCache,
     function (req, res, next) {
-        var deathStar = JSON.parse(deathStarService.getDeathStar());
+        var site = Site.getCurrent();
+        var swapiPreferenceValue = site.getCustomPreferenceValue("enableSWAPI");
 
-        res.render("deathstar", {
-            deathStar: deathStar,
-        });
+        if (swapiPreferenceValue) {
+            var deathStar = JSON.parse(deathStarService.getDeathStar());
+            res.render("deathstar", {
+                deathStar: deathStar
+            });
+        }
 
         next();
     }
