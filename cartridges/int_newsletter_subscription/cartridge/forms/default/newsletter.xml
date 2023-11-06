@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
+		<field
+			formid="email" 
+			label="label.input.email.newsletter" 
+			mandatory="true" 
+			max-length="50" 
+			missing-error="error.message.required"
+            unique-error="error.message.not.unique"
+			parse-error="error.message.parse.email.newsletter.form"
+			range-error="error.message.50orless"
+			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" 
+			value-error="ValueErrorText"
+			type="string"/> 
+
+		<field 
+			formid="firstName" 
+			label="label.input.firstName.newsletter" 
+			mandatory="true" 
+			max-length="100"
+			missing-error="error.message.required" 
+			range-error="error.message.50orless" 
+			type="string" />
+
+		<field 
+			formid="lastName" 
+			label="label.input.lastName.newsletter" 
+			mandatory="true" 
+			max-length="50" 
+			missing-error="error.message.required"
+			range-error="error.message.50orless" 
+			type="string" />
+
+		<field 
+			formid="gender" 
+			label="label.input.gender.newsletter" 
+			mandatory="false"
+			type="string"> 
+            <options>
+                <option optionid="fe" label="select.option.gender.fe" value="fe"/>
+                <option optionid="ma" label="select.option.gender.ma" value="ma"/>
+                <option optionid="uk" label="select.option.gender.uk" value="uk"/>
+            </options>
+        </field>
+</form>

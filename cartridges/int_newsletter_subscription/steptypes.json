@@ -1,0 +1,11 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.newsletterJobStep",
+                "description": "Script to export the data in CSV file and delete the exported objects",
+                "module": "int_newsletter_subscription/cartridge/scripts/steps/NewsletterJob"
+            }
+        ]
+    }
+}
